@@ -9,7 +9,7 @@ import com.etoak.service.UserService;
 
 
 /**
- * @Configuration相当于xml的根元素<beans>标签
+ * @Configuration相当于xml的根元素 <beans> 标签
    *  表示这是一个spring IOC容器
  * @author LPG
  *
