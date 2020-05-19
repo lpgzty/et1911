@@ -11,7 +11,7 @@
 	
 	<!-- 配置处理器映射器 -->
 	<!-- RequestMappingHandlerMapping -->
-	<bean id="123" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
 	
 	
 	<!-- 配置处理器适配器 -->
