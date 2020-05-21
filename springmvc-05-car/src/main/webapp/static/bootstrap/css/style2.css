@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+div#container{
+	margin:0 auto;
+	width:800px;
+	height:800px;
+	background-color:silver;
+	border:solid 1px silver;
+	text-align:center;
+	box-shadow:15px 15px 15px gray;
+}
+
+h2{
+	margin-top:100px;
+	font-family:DFWaWaW5
+}
+
+hr{
+	width:500px;
+}
+
+input[type=submit],input[type=reset]{
+	background-color:pink;
+	border-radius:10px;
+	width:60px;
+	margin-top:20px;
+}
+
+div#show{
+	margin:0 auto;
+	width:400px;
+}
+
+
+
+

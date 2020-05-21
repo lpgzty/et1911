@@ -15,10 +15,13 @@
 		
 		<!-- 1.配置注解扫描  -->
 		<context:component-scan base-package="com.etoak">
-			<context:include-filter type="annotation" 
-			expression="org.springframework.stereotype.Controller"/>
-			<context:include-filter type="annotation" 
-			expression="org.springframework.web.bind.annotation.RestController"/>
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+			<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+			
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+
+			
 		</context:component-scan>
 		
 		<!-- 2.开启springmvc   -->
@@ -26,8 +29,11 @@
 		
 		</mvc:annotation-driven>
 		
+		
 		<!-- 3.将静态资源 （css js）交给WEB容器  default的servlet处理 -->
 		<mvc:default-servlet-handler/>
+		
+		<mvc:resources location="file:e:/upload/" mapping="/pic/**" />
 		
 		<!-- 整合thymeleaf -->
 		<bean id="templateResolver"
@@ -53,3 +59,35 @@
 		
 		
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
