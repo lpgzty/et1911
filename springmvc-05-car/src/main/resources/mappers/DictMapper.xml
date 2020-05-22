@@ -5,7 +5,7 @@
 	<cache flushInterval="10000"></cache>
 	
 	<!--  useCache="false" 不使用缓存-->
-	<select id="queryList" parameterType="string" resultType="Dict" useCache="false">
+	<select id="queryList" parameterType="string" resultType="Dict">
 		select id,
 			group_id as groupId,
 			name,

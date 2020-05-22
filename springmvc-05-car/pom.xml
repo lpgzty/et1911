@@ -24,13 +24,13 @@
 		</dependency>
 
 		<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-jdbc</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-tx</artifactId>
-			</dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
 
 
 
@@ -46,9 +46,9 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-<dependency>
+		<dependency>
 			<groupId>com.github.pageHelper</groupId>
-				<artifactId>pageHelper</artifactId>
+			<artifactId>pageHelper</artifactId>
 
 		</dependency>
 
@@ -101,6 +101,17 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+
+			</dependency>
 
 
 	</dependencies>

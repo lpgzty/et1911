@@ -5,26 +5,32 @@ div#form{
 	width:800px;
 	height:800px;
 	/* //background-color:#BADAFA; */
-	border:solid ;px silver;
+	border:solid 3px silver;
 	/* text-align:center; */
 	box-shadow:15px 15px 15px silver;
 	font-family: "microsoft yahei";
 	font-size: 20px;
 	font-weight: 300;
-	color: #060e4d;
+	color: #ffff00;
+	
+	position:relative; 
+
+	right:350px;
+	bottom:20px;
 }
 body{
-				background-size:2200px 1000px;
-				background-repeat:no-repeat;
+	font-family:"微软雅黑";
+	background-size:2200px 1000px;
+	background-repeat:no-repeat;
 			}
 h2{
 	text-align:center;
-	margin-top:50px;
-	font-family:DFWaWaW5;
+	margin-top:30px;
+	font-family:"微软雅黑";
 	font-family: "microsoft yahei";
 	font-size: 40px;
 	font-weight: 600;
-	color: #560e4d;
+	color: #ff0000;
 }
 
 hr{
