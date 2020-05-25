@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>列表</title>
+<link rel="stylesheet"
+	th:href="@{/static/bootstrap/css/bootstrap.min.css}" />
+
+<link rel="stylesheet" th:href="@{/static/bootstrap/css/style.css}" />
+</head>
+<body background="/springmvc-05-car/pic/128.jpg">
+
+	<div class="form-group">
+		<label for="firstname" class="col-sm-2 control-label">车系</label>
+		
+			<span id="brand"></span>
+		
+	</div>
+
+	<div class="form-group">
+		<label for="firstname" class="col-sm-2 control-label">品牌</label>
+		
+			<span id="series"></span>
+		
+	</div>	
+	
+	
+	<hr>
+	<div class="container-fluid">
+
+		<div class="row" id="data"></div>
+		<div style="text-align: center">
+			当前是第 <span id="pn"></span>页,总共 <span id="total"></span>条记录,总共<span
+				id="pc"></span>页 跳转到 <select name="jump" id="jump"
+				onchange="changePageNumber(this.value)"></select>页 每页显示 <select
+				name="ps" id="ps" onchange="changePageSize(this.value)">
+				<option>3</option>
+				<option>5</option>
+				<option>10</option>
+			</select>条数据 <br>
+			<button type="button" class="btn btn-primary" id="first">首页</button>
+			<button type="button" class="btn btn-success" id="pre">上一页</button>
+			<button type="button" class="btn btn-danger" id="next">下一页</button>
+			<button type="button" class="btn btn-warning" id="end">尾页</button>
+		</div>
+	</div>
+	<script th:src="@{/static/js/jquery/jquery.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+	<script
+		th:src="@{/static/bootstrap/js/validate/jquery.validate.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/static/bootstrap/js/validate/messages_zh.min.js}"
+		type="text/javascript"></script>
+
+	<script th:inline="javascript" type="text/javascript">
+      //定义contextPath
+		const path = /*[[${#request.getContextPath()}]]*/
+		
+		$(function(){
+			et1911.queryCar()
+			et1911.queryBrand()
+			et1911.querySeries()
+		})
+		
+		
+		
+		
+		
+		
+		
+		let et1911 = {
+    		  
+    		  
+			querySeries:function(){
+  			  $.ajax({
+						url:path+'/list/queryCarSeries',
+						type:'post',
+						data:'',
+						dataType:'json',
+						success:function(data){
+							let radio = ''
+							for ( let dict of data ){
+								radio += `<span>${dict}&ensp;&ensp;</span>`
+							}
+							$('#series').html(radio)
+						}
+					})
+  		  },
+    		  
+    		  queryBrand:function(){
+    			  $.ajax({
+						url:path+'/list/queryCarBrand',
+						type:'post',
+						data:'',
+						dataType:'json',
+						success:function(data){
+							let radio = ''
+							for ( let dict of data ){
+								radio += `<span>${dict}&ensp;&ensp;</span>`
+							}
+							$('#brand').html(radio)
+						}
+					})
+    		  },
+    		  
+    		  
+    		  queryCar:function(){
+    			  $.ajax({
+    				  url:path +　'/list/queryCar',
+    				  type:'post',
+						data:'',
+						dataType:'json',
+						success:function(data){
+							let pics=""
+			                    if(data!=null){
+			                        $.each(data,function (i,car) {
+			                            
+			                            pics+=`
+			                            	<div class="col-sm-6 col-md-3">
+			                                <div class="thumbnail" >
+			                                	<img src="${path+car.pic}" style="width: 550px;height: 350px">
+			                                    <div class="caption" style="background-color: #A6A6A6" >
+			                                    	<h3  style="font-weight: 600;margin-left: 35px;">${car.brand} &ensp;
+			                                    	${car.series} &ensp;${car.gearboxName}</h3>
+			                                    	<h3 style="font-weight: 600;margin-left: 35px;">${car.licensingTime}上牌|${car.mileage}万公里</h3>
+				                                    <h3 style="color: #ff0000; margin-left: 35px;">价格:${car.price}万元</h3>
+				                                    <h4 style="font-weight: 600;margin-left: 35px;">${car.summary}</h4>
+			                                  </div>
+			                                </div>
+			                              </div> `
+			                        })
+			                        $("#data").html(pics);
+			                    }
+
+						}
+    			  })
+    		  }
+    		  
+      }
+      
+		
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /* 
+            let pn=1,ps=8
+            let pre,next,end
+            let tj =''
+            let px
+            $(function () {
+                queryData(pn,ps,tj)
+            })
+            $(function () {
+                queryData(pn,ps,tj);
+                $('#first').on("click",function () {
+                    queryData(1,ps,tj);
+                })
+                $('#pre').on("click",function () {
+                    queryData(pre,ps,tj);
+                })
+                $('#next').on("click",function () {
+                    queryData(next,ps,tj);
+                })
+                $('#end').on("click",function () {
+                    queryData(end,ps,tj);
+                })
+            })
+            function changePageNumber(v) {
+                pn=v
+                queryData(v,ps,tj)
+            }
+            function changePageSize(v) {
+                ps=v
+                queryData(1,v,tj)
+            }
+            function queryData(pn,ps,tj) {
+                $.post("list",'method=queryFront&pageNumber='+pn+'&pageSize='+ps+tj,msg=>{
+                    //console.log(msg)
+                    let ops=''
+                    for(let i=1;i<=msg.pageCount;i++){
+                        ops+="<option value='"+i+"' "+(i==msg.pageNumber?"selected":"")+">"+i+"</option>>"
+                    }
+                    $('#jump').html(ops)
+
+                    $('#pn').text(msg.pageNumber)
+                    $('#total').text(msg.total)
+                    $('#pc').text(msg.pageCount)
+                    console.log(msg.pageNumber)
+                    px = msg.pageNumber
+                    pre = msg.pre
+                    next = msg.next
+                    end = msg.pageCount
+                    let pics=''
+                    if(msg.rows!=null){
+                        $.each(msg.rows,function (i,book) {
+                            pics += `<div class="col-sm-6 col-md-4">
+                                <div class="thumbnail">`
+                                    if(book.bp!=null){
+                                        pics += `<img src="/book_servlet/${book.bp.savepath}" style="width: 300px;height: 400px">`
+                                    }else{
+                                        pics += `<img src="image/默认.jpg" style="width: 300px;height: 400px" title="暂时还也没有图片哦">`
+                                     }
+                                 pics += `<div class="caption">
+                                    书名:${book.name}<br>
+                                    作者:${book.author}<br>
+                                    价格:${book.price}<br>
+                                    <a type="button" class="btn btn-primary" onclick="showinfo()">显示详情</a>
+                                    <button type="button" class="btn btn-success" onclick="addToCar('${book.id}')">加入购物车</button>
+                                  </div>
+                                </div>
+                              </div>`
+                        })
+                    }
+                    $('#data').html(pics)
+                },"json")
+            }
+            function addToCar(bookid) {
+                $.post("book","method=addToCar&id="+bookid,msg=>{
+                    alert('添加成功!!')
+                },"json")
+            } */
+        </script>
+</body>
+</html>

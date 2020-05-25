@@ -30,4 +30,59 @@
 			NOW()
 		)
 	</insert>
+	
+   <select id="queryList" parameterType="CarVo" resultType="CarVo">
+		SELECT tc.id,
+				tc.brand, 
+		    tc.series, 
+		    tc.price, 
+		    tc.licensing_time as licensingTime,
+		    tc.level,
+				t1.name as levelName,
+		    tc.gearbox,
+				t2.name as gearboxName,
+		    tc.output_volume as outputVolume, 
+				t3.name as outputVolumeName,
+		    tc.mileage, 
+		    tc.location,
+		    tc.pic,
+		    tc.summary,
+		    tc.create_time as createTime
+	 FROM t_springmvc_car tc 
+	 left join t_springmvc_dict t1 on tc.level = t1.value and t1.group_id='level'
+	 left join t_springmvc_dict t2 on tc.gearbox = t2.value and t2.group_id='gearbox'
+	 left join t_springmvc_dict t3 on tc.output_volume = t3.value and t3.group_id='output_volume'
+	</select> 
+	<select id="getAllBrand" resultType="String">
+		select brand from t_springmvc_car group by brand
+	</select>
+	
+	<select id="getSeriesByBrand" parameterType="string" resultType="String">
+		select series from t_springmvc_car 
+		
+		<where>
+			<if test="brand != null and brand != ''">
+				brand = #{brand}
+			</if>
+		</where>
+		group by series
+		<if test="brand == null or brand == ''">
+			limit 10
+		</if>
+	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

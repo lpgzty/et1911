@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etoak.mapper.CarListMapper">
+	<select id="queryCar" resultType="Car">
+		SELECT 
+				tc.brand, 
+		    tc.series, 
+		    tc.price, 
+		    tc.licensing_time as licensingTime,
+		    tc.level,
+				t1.name as levelName,
+		    tc.gearbox,
+				t2.name as gearboxName,
+		    tc.output_volume as outputVolume, 
+				t3.name as outputVolumeName,
+		    tc.mileage, 
+		    tc.location,
+		    tc.pic,
+		    tc.summary,
+		    tc.create_time as createTime
+	 FROM t_springmvc_car tc 
+	 left join t_springmvc_dict t1 on tc.level = t1.value and t1.group_id='level'
+	 left join t_springmvc_dict t2 on tc.gearbox = t2.value and t2.group_id='gearbox'
+	 left join t_springmvc_dict t3 on tc.output_volume = t3.value and t3.group_id='output_volume' limit 0,8
+	</select>
+	
+	<select id="queryCarBrand" resultType="String">
+		select brand from t_springmvc_car
+	</select>
+	
+	<select id="queryCarSeries" resultType="String">
+		select series from t_springmvc_car
+	</select>
+	
+	
+</mapper>
