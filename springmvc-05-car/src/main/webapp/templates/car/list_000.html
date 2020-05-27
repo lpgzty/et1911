@@ -30,32 +30,20 @@
                         <br>
                         <!-- 2.车系 -->
                         <div class="form-group">
-                            <label   for="contact" style="background-color: #FAFAFA;margin-left: 65px;font-size: 25px;font-weight: 600;color: #800040;">车系&ensp;</label>
+                            <label  for="contact" style="background-color: #FAFAFA;margin-left: 65px;font-size: 25px;font-weight: 600;color: #800040;">车系&ensp;</label>
                             <span id="series" style="background-color: #FFFFFF;font-size: 25px;font-weight: 400;color: #800040;"></span>
                         </div>
                         <br>
-                        <!-- <div class="checkbox">
-						    <label>价格
-						      <span id="price">
-								
-							</span>
-						    </label>
-						  </div> -->
                         <!-- 3.价格 -->
-                       <div class="checkbox">
-                            <label class="col-sm-12 control-label" for="price" style="background-color: #FAFAFA;margin-left: 65px;font-size: 25px;font-weight: 600;color: #800040;">价格&ensp;
-                            <span id="price" style="transform: scale(3,3);font-weight: 300;font-size: 25px;background-color: #FAFAFA;">
-								
-							</span>
-							</label>
-                        </div> 
+                        <div class="form-group">
+                            <label  for="contact" style="background-color: #FAFAFA;margin-left: 65px;font-size: 25px;font-weight: 600;color: #800040;">价格&ensp;</label>
+                            <span id="" style="background-color: #FFFFFF;font-size: 25px;font-weight: 400;color: #800040;">1万	   2~3万  3~5万  5~7万 7~9万</span>
+                        </div>
                         <br>
                       <!-- 车龄 -->
                         <div class="form-group">
                             <label  for="contact" style="background-color: #FAFAFA;margin-left: 65px;font-size: 25px;font-weight: 600;color: #800040;">车龄&ensp;</label>
-                            <span  id="vehicle_age" style="transform: scale(2,2);font-weight: 300;font-size: 25px;background-color: #FAFAFA;">
-			    	
-			    			</span>
+                            <span style="background-color: #FFFFFF;font-size: 25px;font-weight: 400;color: #800040;">1年内 2~3年 3~5年  5~7年 7~9年</span>
                         </div>
                         <br>
                         <!-- 级别-->
@@ -128,11 +116,6 @@
 		et1911.querySelectDict('output_volume')
 		et1911.querySelectDict('gearbox')
     
-		//查询价格区间
-		et1911.getPriceDict()
-		et1911.getVehicleAgeDict()
-		
-		
 		
 		$('#firstPage').click(function(){
 			et1911.queryList();
@@ -148,7 +131,10 @@
 		})
 		
 		
-		
+		$('#series').change(function(){
+			
+			et1911.queryList();
+		})
 		$('#level').change(function(){
 			
 			et1911.queryList();
@@ -166,13 +152,6 @@
 			et1911.queryList();
 		})
 
-		$("input[name='price']").change(function(){
-			et1911.queryList()
-		})
-		$("#vehicle_age").change(function(){
-			et1911.queryList()
-		})
-		
 		
 		
 	})
@@ -183,54 +162,14 @@
 	let brand = ''
 	let gearbox = ''
 	
-	let locations = ''
-	let output_volume = ''
-	let level = ''
-	let seriesValue = ''
+let locations = ''
+let output_volume = ''
+let level = ''
+let series = ''
 
 	
 
 	let et1911 = {
-			
-			getPriceDict:function(){
-				$.ajax({
-					url:path+'/dict/price',
-					type:'get',
-					data:'',
-					dataType:'json',
-					async:false,
-					success:function(res){
-						let checkbox = ''
-							for(dict of res){
-        						checkbox += "<label class='checkbox-inline'>"
-        						+"&ensp;<input  type='checkbox' name='price' value='"+dict.value+"'>"
-        						+dict.name
-        						+"&ensp;&ensp;&ensp;</label>"
-        					}
-
-						$('#price').html(checkbox)
-					}
-				})
-			},
-			getVehicleAgeDict:function(){
-				$.ajax({
-					url:path+'/dict/vehicle_age',
-					type:'get',
-					data:'',
-					dataType:'json',
-					async:false,
-					success:function(res){
-						let radio = ''
-						$.each(res,function(i,dict){
-							radio += "<label class='radio-inline'>"
-							+"&ensp;<input style='transform: scale(1.5,1.5);font-weight: 300;font-size: 30px;' type='radio' name='vehicleAge' value='"+dict.value+"'>"+dict.name+"&ensp;&ensp;&ensp;</label>"
-						})
-						$('#vehicle_age').html(radio)
-					}
-				})
-			},
-			
-			
 			
 			queryList: function(pageNum,pageSize){
 				
@@ -239,35 +178,16 @@
 				pageNum = pageNum || 1
 				pageSize = pageSize || 8
 				
-				
 				let level = $('#level').val() || ''
-				let gearbox = $('#gearbox').val() || ''
-				let outputVolume = $('#output_volume').val() || ''
-				let location = $('#location').val() || ''
+				let series = $('#series').val() || ''
 				
-				let priceList = []
-				
-				$("input[name='price']:checked").each(function(){
-					//console.log(priceList)
-					priceList.push(this.value)
-				})
-				let vehicleAge = $('input[name="vehicleAge"]:checked').val() || ''
 				
 				
 				$.ajax({
 					url: path + '/car/list',
 					type: 'GET',
-					data:'pageNum='+pageNum
-					+'&pageSize='
-					+pageSize
-					+'&series='+seriesValue		
-					+'&brand='+brand
-					+'&level='+level
-					+'&gearbox='+gearbox
-					+'&location='+location
-					+'&outputVolume='+outputVolume
-					+'&priceList='+priceList
-					+'&vehicleAge='+vehicleAge,
+					data:'pageNum='+pageNum+'&pageSize='+pageSize+'&brand='+brand
+					+'&level='+level+'&gearbox='+gearbox+'&location='+locations+'&outputVolume='+output_volume,
 
 					dataType:'json',
 					success: function(res){
@@ -329,7 +249,7 @@
 						success:function(data){
 							let radio = ''
 								$.each(data,function(index,brand){
-								radio += `<span onclick="et1911.querySeries('${brand}')">${brand}&ensp;&ensp;&ensp;&ensp;</span>`
+								radio += `<span onclick="et1911.querySeries('${brand}')">${brand}&ensp;&ensp;</span>`
 							})
 							$('#brand').html(radio)
 						}
@@ -337,7 +257,6 @@
   		  },
 	  		querySeries:function(brands){
 	  				brand = brands || '';
-	  				seriesValue=''
 	  				console.log(brand)
 	  				et1911.queryList()
 	  				
@@ -351,18 +270,12 @@
 								console.log(data)
 								let radio = ''
 								for ( let dict of data ){
-									radio += `<span onclick="et1911.querySer('${dict}')">${dict}&ensp;&ensp;</span>`
+									radio += `<span onclick="et1911.queryList(${series})">${dict}&ensp;&ensp;</span>`
 								}
 								$('#series').html(radio)
 							}
 						})
 			  },
-			  querySer:function(seriess){
-				  seriesValue = seriess
-				  et1911.queryList()
-				  
-			  },
-			  
 				//查询级别和排量变速箱
 				querySelectDict: function(groupId){
 					if(groupId){

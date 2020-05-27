@@ -63,9 +63,10 @@ public class CarController {
 	public PageVo<CarVo> queryList(
 			@RequestParam(required = false, defaultValue = "1") int pageNum,
 			@RequestParam(required = false, defaultValue = "8") int pageSize,
-			CarVo carVo
+			CarVo carVo,
+			String[] priceList
 			){
-		return carService.queryList(pageNum, pageSize, carVo);
+		return carService.queryList(pageNum, pageSize, carVo,priceList);
 	}
 	
 	

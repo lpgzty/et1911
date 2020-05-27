@@ -13,7 +13,7 @@ public interface CarService {
 	//添加车辆信息
 	int addCar(Car car);
 	
-	PageVo<CarVo> queryList(int pageNum,int pageSize ,CarVo carVo);
+	PageVo<CarVo> queryList(int pageNum,int pageSize ,CarVo carVo, String[] priceList);
 	
 List<String> getAllBrand();
 	
