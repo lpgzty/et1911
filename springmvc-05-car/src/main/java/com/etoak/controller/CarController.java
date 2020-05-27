@@ -131,6 +131,8 @@ public class CarController {
 	@ResponseBody
 	public List<String> getSeries(String brand){
 		return carService.getSeriesByBrand(brand);
+		
+		
 	}
 	
 	
