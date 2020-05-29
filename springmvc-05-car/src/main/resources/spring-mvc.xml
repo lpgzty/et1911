@@ -34,7 +34,6 @@
 		
 		</mvc:annotation-driven>
 		
-		
 		<!-- 3.将静态资源 （css js）交给WEB容器  default的servlet处理 -->
 		<mvc:default-servlet-handler/>
 		
@@ -91,8 +90,6 @@
 		
 		
 </beans>
-
-
 
 
 
