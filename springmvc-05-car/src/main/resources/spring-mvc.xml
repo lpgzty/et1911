@@ -74,7 +74,7 @@
 		<mvc:view-controller path="/" view-name="index"/>
 		<mvc:view-controller path="/user/toLogin" view-name="login"/>
 		
-		<mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<!-- 配置需要拦截的地址,/**表示拦截所有层级的请求 -->
 			<mvc:mapping path="/**" />

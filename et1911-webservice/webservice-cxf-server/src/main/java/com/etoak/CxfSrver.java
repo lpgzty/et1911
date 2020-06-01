@@ -8,13 +8,13 @@ import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 /**
  * Created by LPG on 2020-05-29.
  */
-public class CxfServer {
+public class CxfSrver {
     public static void main(String[] args) {
         //创建jaxWSServerFactory
         JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
 
         //设置wsdl地址
-        factory.setAddress("http://localhost:8090/hello");
+        factory.setAddress("http://localhost:8090/hello?wsdl");
 
         factory.setServiceClass(HelloService.class);
 
@@ -23,7 +23,6 @@ public class CxfServer {
         Server server  = factory.create();
         server.start();
         System.out.println("Server start");
-
 
     }
 }

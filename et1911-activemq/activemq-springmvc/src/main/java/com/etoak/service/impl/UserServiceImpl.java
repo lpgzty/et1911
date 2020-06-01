@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public int addUser(User user) {	
-		String userId = UUID.randomUUID().toString().replaceAll("-","");
+	public int addUser(final User user) {
+		final String userId = UUID.randomUUID().toString().replaceAll("-","");
 		user.setUserId(userId);
 		int result = userMapper.addUser(user);
 		
